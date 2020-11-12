@@ -210,4 +210,3 @@ resp.sendRedirect("http://localhost:8080");
 9. *Exception:*
 
 ##### 四大作用域
-
