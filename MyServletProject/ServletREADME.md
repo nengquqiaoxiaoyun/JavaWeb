@@ -190,3 +190,19 @@ resp.setHeader("Location", "http://localhost:8080");
 ```java
 resp.sendRedirect("http://localhost:8080");
 ```
+
+#### *JSP*
+
+##### 九大内置对象
+
+1. *Request:*
+2. *Response:*
+3. *Session:*
+4. *Application:*
+5. *PageContext:*
+6. *Config:*
+7. *Out:*
+8. *Page:*
+9. *Exception:*
+
+##### 四大作用域
