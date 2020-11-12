@@ -1,0 +1,42 @@
+package com.chhoyun;
+
+import com.sun.media.jfxmediaimpl.HostUtils;
+
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebInitParam;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.Enumeration;
+
+/**
+ * @author: huakaimay
+ * @since: 2020-11-09
+ */
+public class ServletTest extends HttpServlet {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("dopost");
+        doGet(request, response);
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("doget");
+
+
+        String username = getServletConfig().getInitParameter("username");
+        System.out.println(username);
+
+        ServletContext servletContext = getServletConfig().getServletContext();
+        String context = servletContext.getInitParameter("context");
+        String contextPath1 = servletContext.getContextPath();
+        System.out.println("context: " + context);
+
+        String contextPath = servletContext.getRealPath("/");
+        System.out.println("contextPath: " + contextPath);
+
+
+    }
+}
