@@ -26,7 +26,5 @@ public class CookieServletTest extends HttpServlet {
         response.addCookie(cookie);
         response.addCookie(cookie1);
 
-        response.sendRedirect("/cookie.jsp");
-
     }
 }
