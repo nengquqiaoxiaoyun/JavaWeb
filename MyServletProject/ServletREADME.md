@@ -211,6 +211,18 @@ resp.sendRedirect("http://localhost:8080");
 
 *Cookie*的默认生成时间是一次会话，*cookie.setMaxAge()*可以设置生存时间，单位为秒
 
+不主动设置*MaxAge*，默认*MaxAge<0*，即*cookie*存在于浏览器内存中，Cookie随浏览器关闭而消失即一次会话
+
+设置*MaxAge>0*，响应持久性*Cookie*，会存在电脑硬盘的特定文件夹下
+
+设置特定*Cookie*的*MaxAge=0*，则会删除已经存在客户端的此*Cookie：*
+
+```java
+Cookie cookie = new Cookie("","");
+cookie.setMaxAge(0);
+response.addCookie(cookie);
+```
+
 #### *Session*
 
 #### *JSP*
