@@ -10,7 +10,9 @@
 <Context docBase="/Users/wentimei/Downloads/jspProject"  />
 ```
 
-*docBase*: 项目的实际路径
+*docBase*: 项目的实际路径，路径应该指向的是*WEB-INF*的上一级
+
+![image-20201113090819884](assets/image-20201113090819884.png)
 
 如果有多个项目则配置多个*xml*即可
 
@@ -60,9 +62,9 @@ https://www.cnblogs.com/deng-cc/p/7152988.html
 
 - 获取*web.xml*的上下文参数*(getInitParameter)*
 
-- 获取当前的工程路径 *(getContextPath)*
+- 获取虚拟路径 *(getContextPath)*
 
-- 获取工程部署后在服务器硬盘上的绝对路径*（getRealPath）*
+- 根据虚拟路径获取绝对路径*（getRealPath）*
 
 > */* 斜杠被服务器解析地址为: *http://ip:port/工程名/* *映射到* *IDEA* *代码的* *web* 目录
 
@@ -195,9 +197,27 @@ resp.setHeader("Location", "http://localhost:8080");
 resp.sendRedirect("http://localhost:8080");
 ```
 
+#### *Cookie*
+
+ *Cookie*是将用户的信息保存到**客户端**浏览器的一个技术,当下次访问的时候,浏览器会自动携带*Cookie*的信息过来到服务器端.
+
+*addCookie*即把*Cookie*响应给客户端
+
+*Cookie*存在于客户端，却是由服务器产生发送给客户端的，起初有个*JSESSIONID*是服务器自动生成给客户端的
+
+**相当于本地缓存的作用，可以提高效率，但是不够安全，最多只能存储*4kb*的数据，*key*和*value*都是*String*类型的**
+
+##### 默认生存时间
+
+*Cookie*的默认生成时间是一次会话，*cookie.setMaxAge()*可以设置生存时间，单位为秒
+
+#### *Session*
+
 #### *JSP*
 
 ##### 九大内置对象
+
+*jsp*内置对象可以直接使用
 
 1. *Request:*
 2. *Response:*
@@ -210,3 +230,10 @@ resp.sendRedirect("http://localhost:8080");
 9. *Exception:*
 
 ##### 四大作用域
+
+所有的作用域都有三个一样的方法： ***(setAttribute, getAttribute, removeAttribute)***
+
+- *PageContext：*作用于当前页面
+- *Request：*作用于一次请求
+- *Session：*作用于一次会话
+- *Application：*整个项目有效（重启或其他项目无效，可以使用*JNDI*解决）
