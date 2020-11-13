@@ -12,14 +12,14 @@
 </head>
 <body>
 
-cookie:
-<form action="cookieServlet" method="get">
+<form action="cookie2.jsp" >
     <%
-        Cookie[] cookies = request.getCookies();
-        out.print(cookies.length + "<br/>");
-        for (Cookie cookie : cookies) {
-            out.print(cookie.getName() + ": " + cookie.getValue() + "<br/>");
-        }
+        Cookie cookie = new Cookie("name", "张三");
+        Cookie cookie1 = new Cookie("name1", "lisi");
+
+        response.addCookie(cookie);
+        response.addCookie(cookie1);
+
     %>
     <input type="submit">
 </form>
