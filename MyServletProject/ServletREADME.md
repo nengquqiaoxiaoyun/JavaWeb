@@ -207,7 +207,7 @@ resp.sendRedirect("http://localhost:8080");
 
 **相当于本地缓存的作用，可以提高效率，但是不够安全，最多只能存储*4kb*的数据，*key*和*value*都是*String*类型的**
 
-##### 默认生存时间
+##### 生存时间
 
 *Cookie*的默认生成时间是一次会话，*cookie.setMaxAge()*可以设置生存时间，单位为秒
 
@@ -224,6 +224,55 @@ response.addCookie(cookie);
 ```
 
 #### *Session*
+
+*Session*就是会话，它是用来维护一个客户端和服务器之间关联的一种技术
+
+相比较*Cookie*存在客户端，*Session*则是服务端的东西
+
+##### *Session*机制
+
+客户端第一次访问服务端时，服务端会产生一个*session*对象（用于存储客户信息），并且每个*session*对象都有一个唯一的*sessionId*（用于区分其他*session*）。服务端还会产生一个*cookie*，*name=JSESSIONID，value=sessionId*。服务端会在响应客户端的时候将*cookie*发送给客户端。因此客户端就有了*cookie*和服务端*session*一一对应。
+
+也就是说当客户端访问服务器，看是否有*cookie（JESSIONID）*能和服务端的*session（sessionId）*对应起来，没有则创建
+
+##### 生命周期
+
+在 *Tomcat* 服务器的配置文件 *web.xml*中默认有以下的配置，它就表示配置了当前 *Tomcat* 服务器下所有的 *Session* 
+
+超时配置默认时长为：*30* 分钟。 
+
+![image-20201116161918558](assets/image-20201116161918558.png)
+
+如果想配置所有Session的超时时长，在自己项目中的web.xml中配置以上信息即可。
+
+如果想单独配置某个Session的时长可以通过*setMaxInactiveInterval(int interval)*来配置单位为秒。
+
+**注意：** ***session*只作用于一次会话，也就是说，一旦会话结束，之后再访问就获取不到数据了。**
+
+*cookie*默认为一次会话，关闭浏览器之后*cookie*销毁。关闭浏览器后仅仅是丢失*session*的*id*即JSESSIONID，从而导致找不到session，**而session本身还是存在的**。如果再次访问服务器，就会创建新的*cookie*。如果想要一次会话之后仍能识别原来的客户端，只需要设置*cookie（JSESSIONID）*的持久化即可。
+
+> [浏览器关闭后，Session就销毁了吗？](https://blog.csdn.net/QQ1012421396/article/details/70842148)
+
+###### *Session*序列化
+
+当服务器关闭之后，会生成一个叫*SESSIONS.ser*的文件用来保存所有的session信息，该文件生成在*Tomcat*的*work/Catalina/localhost/项目*下。当启动服务器是，该文件被读取并销毁。
+
+##### 使用
+
+```java
+// 获取session
+Session session = request.getSession();
+// 存
+session.setAttribute("", obj);
+// 取
+Object obj = session.getAttribute("");
+// 销毁所有的session
+session.invalidate();
+// 销毁指定session
+session.remoteAttribute("");
+// 设置指定session的超时时间 单位s
+session.setMaxInactiveInterval(60 * 20);
+```
 
 #### *JSP*
 

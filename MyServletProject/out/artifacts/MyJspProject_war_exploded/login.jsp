@@ -42,6 +42,25 @@
 <jsp:include page="/header.jsp"></jsp:include>
 
 
+<%!
+    String username;
+%>
+
+<%
+    Cookie[] cookies = request.getCookies();
+    System.out.println("进入jsp页面：");
+    if (cookies != null) {
+        for (Cookie cookie : cookies) {
+            String name = cookie.getName();
+            if ("username".equals(name)) {
+                username = cookie.getValue();
+                System.out.println("cookie不为null，cookie: " + username);
+            }
+        }
+    }
+%>
+
+
 <div class="container"
      style="width: 100%; height: 460px; background: #FF2C4C url('images/loginbg.jpg') no-repeat;">
     <div class="row">
@@ -59,7 +78,7 @@
                         <label for="username" class="col-sm-2 control-label">用户名</label>
                         <div class="col-sm-6">
                             <input type="text" class="form-control" id="username" name="username"
-                                   placeholder="请输入用户名">
+                                   placeholder="请输入用户名" value="<%=username == null ? "" : username %>">
                         </div>
                     </div>
                     <div class="form-group">
@@ -67,9 +86,9 @@
                         <div class="col-sm-6">
                             <input type="password" class="form-control" id="password" name="password"
                                    placeholder="请输入密码">
-                         <div style="color:red">
-                             <%=request.getAttribute("msg") == null ? "" : request.getAttribute("msg")%>
-                         </div>
+                            <div style="color:red">
+                                <%=request.getAttribute("msg") == null ? "" : request.getAttribute("msg")%>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -85,13 +104,14 @@
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
                             <div class="checkbox">
-                                <label> <input type="checkbox"> 自动登录
-                                </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <label> <input
-                                    type="checkbox"> 记住用户名
+                                <label> <input type="checkbox"> 自动登录 </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <label>
+                                <input type="checkbox" name="checked" checked="checked"> 记住用户名
                             </label>
                             </div>
                         </div>
                     </div>
+
+
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
                             <input type="submit" width="100" value="登录" name="submit"
