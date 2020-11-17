@@ -15,6 +15,8 @@
 
 cookie333: <br/>
 <%
+
+
     Cookie[] cookies = request.getCookies();
     if(cookies != null) {
         for (Cookie cookie : cookies) {
