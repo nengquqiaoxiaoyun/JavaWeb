@@ -23,12 +23,20 @@ public class SessionTest extends HttpServlet {
 
         String id = session.getId();
         session.setAttribute("uname", "zhangsan");
-  
+
 //        Cookie cookie = new Cookie("JSESSIONID", id);
 //        cookie.setMaxAge(60 * 10);
 //        response.addCookie(cookie);
 
         System.out.println("id：" + id);
-//        request.getRequestDispatcher("/sessionDemo/session.jsp").forward(request, response);
+//        request.getRequestDispatcher("sessionDemo/session.jsp").forward(request, response);
+        // 重定向路径测试
+        System.out.println("虚拟路径： " + getServletContext().getContextPath());
+        String realPath = getServletContext().getRealPath(getServletContext().getContextPath());
+        System.out.println("实际路径： " + realPath);
+//        response.sendRedirect(getServletContext().getContextPath() + "/sessionDemo/session.jsp");
+//        response.sendRedirect("sessionDemo/session.jsp");
+        response.sendRedirect("/servletProject/sessionDemo/session.jsp");
+
     }
 }
