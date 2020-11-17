@@ -18,6 +18,25 @@
 
 ### *Servlet*
 
+#### *servlet*中路径总结
+
+1. *web.xml*
+
+*web.xml*中路径以 /开头表示： *http://ip地址:端口号/项目名称*
+
+2. *jsp*
+
+*jsp*中以/开头表示：  *http://ip地址:端口号*
+
+不以/开头表示： *http://ip地址:端口号/项目名称*
+
+3. 转发*&*重定向
+
+- 转发中都表示 *http://ip地址:端口号/项目名称*
+- 重定向同*jsp*
+
+转发和重定向在*jsp*中和*servlet*中一样使用
+
 #### *servlet*下获取资源问题
 
 https://www.cnblogs.com/deng-cc/p/7152988.html
@@ -104,6 +123,8 @@ https://www.cnblogs.com/deng-cc/p/7152988.html
 
 ##### *request*请求转发
 
+请求转发只能在项目内转发
+
 获得请求转发器：
 
 ```java
@@ -114,6 +135,13 @@ RequestDispatcher getRequestDispatcher(String path)
 
 ```java
 forward(ServletRequest request, ServletResponse response)
+```
+
+###### 请求转发的路径
+
+```java
+// 这里的路径 不管是绝对路径还是相对路径都是一样的，都表示 http://ip地址:端口号/项目名称
+request.getRequestDispatcher("sessionDemo/session.jsp").forward(request, response);
 ```
 
 ###### 转发与重定向的区别
@@ -132,18 +160,6 @@ forward(ServletRequest request, ServletResponse response)
 - 看跳转是否在项目内，在项目内都可以，项目外必须重定向
 - 是否需要携带数据，如果传递参数用转发，否则重定向
 - 重定向可以防止表单重复提交，转发不可以
-
-##### *Web*资源路径的编写
-
-1. 客户端：
-
-   客户端 */* 代表  *http://ip地址:端口号* ， 不加上 */*表示当前操作文件的父路径
-
-2. 服务端
-
-   服务端 */*代表  *http://ip地址:端口号/项目名称*
-
-**浏览器解析的路径是前端路径，*Tomcat*服务器解析的路径是后端路径**
 
 #### *HttpServletResponse*
 
@@ -195,6 +211,15 @@ resp.setHeader("Location", "http://localhost:8080");
 
 ```java
 resp.sendRedirect("http://localhost:8080");
+```
+
+###### 重定向的路径
+
+```java
+// 下面三种方式都可以重定向到指定位置
+ response.sendRedirect(getServletContext().getContextPath() +    "/sessionDemo/session.jsp");
+ response.sendRedirect("sessionDemo/session.jsp");
+ response.sendRedirect("/servletProject/sessionDemo/session.jsp");
 ```
 
 #### *Cookie*
