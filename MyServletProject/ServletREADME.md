@@ -301,6 +301,19 @@ session.setMaxInactiveInterval(60 * 20);
 
 #### *JSP*
 
+*JSP*全称*Java Server Page*，直译就是“运行在服务器端的页面”。我们可以直接在*JSP*文件里写*HTML*代码，使用上把它**当做** *HTML*文件。我们还可以把*Java*代码内嵌在*JSP*页面中，很方便地把动态数据渲染成静态页面。
+
+当有人请求*JSP*时，**服务器内部会经历一次动态资源*（JSP）*到静态资源*（HTML）*的转化**，**服务器会自动帮我们把*JSP*中的*HTML*片段和数据拼接成静态资源响应给浏览器**。也就是说*JSP*是运行在服务器端，但最终发给客户端的都已经是转换好的*HTML*静态页面（在响应体里）。
+
+> WEB容器接收到以.jsp为扩展名的URL的访问请求时，它将把该请求交给JSP引擎去处理。Tomcat中的JSP引擎就是一个Servlet程序，它负责解释和执行JSP页面。
+>
+> 每个JSP 页面在第一次被访问时，JSP引擎将它翻译成一个Servlet源程序，接着再把这个Servlet源程序编译成Servlet的class类文件，然后再由WEB容器像调用普通Servlet程序一样的方式来装载和解释执行这个由JSP页面翻译成的Servlet程序。 
+>
+> 【存放位置】
+> Tomcat把为JSP页面创建的Servlet源文件和class类文件放置在“<TOMCAT_HOME>\work\Catalina\<主机名>\<应用程序名>\”目录中，Tomcat将JSP页面翻译成的Servlet的包名为org.apache.jsp.<JSP页面在WEB应用程序内的目录名> 。
+>
+> 来源：https://zhuanlan.zhihu.com/p/42343690
+
 ##### 九大内置对象
 
 *jsp*内置对象可以直接使用
