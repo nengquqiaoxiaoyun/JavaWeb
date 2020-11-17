@@ -336,3 +336,47 @@ session.setMaxInactiveInterval(60 * 20);
 - *Request：*作用于一次请求
 - *Session：*作用于一次会话
 - *Application：*整个项目有效（重启或其他项目无效，可以使用*JNDI*解决）
+
+#### *EL*表达式
+
+*EL（Express Lanuage）*表达式可以嵌入在*JSP*页面内部，减少*JSP*脚本的编写，***EL*出现的目的是要替代*JSP*页面中脚本的编写**
+
+原来从域中取出数据: ***<%=request.getAttribute(name)%>***
+
+使用*EL*进行取代:***${name}***
+
+***EL*是从四个域中去找和*name*匹配的值，优先顺序从作用域最小的开始，依次往上**
+
+可以指定域去拿取数据：***${requestScop.name}***
+
+**如果值为*null*，*EL*将展示位空字符串**
+
+##### *EL*的三个作用
+
+1. 可以从域中取值
+2. 可以执行表达式的运算
+3. 有*11*个内置对象
+
+Version:0.9 StartHTML:0000000105 EndHTML:0000000928 StartFragment:0000000141 EndFragment:0000000888   
+
+#####  *.*点运算 和  *[ ]*  中括号运算符 
+
+使用*[ ]*可以输出一些特出字符，而 *.* 不能
+
+```jsp
+<body> 
+  <% 
+    Map<String,Object> map = new HashMap<String, Object>(); 
+    map.put("a.a.a", "aaaValue"); 
+    map.put("b+b+b", "bbbValue"); 
+    map.put("c-c-c", "cccValue"); 
+    request.setAttribute("map", map); 
+  %> 
+    
+    ${ map['a.a.a'] } <br> 
+    ${ map["b+b+b"] } <br> 
+    ${ map['c-c-c'] } <br> 
+    
+</body>
+```
+
