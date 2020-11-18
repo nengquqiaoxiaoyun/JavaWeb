@@ -43,7 +43,9 @@ https://www.cnblogs.com/deng-cc/p/7152988.html
 
 *Servlet：* 运行在服务端的Java*小程序*，是*sun*公司提供一套规范，用**来处理客户端请求、响应给浏览器的动态资源**
 
-#### *Servlet*声明周期
+#### *Servlet*生命周期
+
+如果没有配置*(或小于0) \<load-on-startup>\</load-on-startup>* *Servlet*会在第一次请求的时候*init*，配置大于等于0时，在*Tomcat*启动时就初始化。
 
 1. 构造*Servlet*，然后使用*init*方法初始化
 2. 每次都会调用service方法处理客户端的请求
@@ -438,3 +440,66 @@ http://archive.apache.org/dist/jakarta/taglibs/standard/binaries/
 
 </c:set>
 ```
+
+#### *Filter*过滤器
+
+*Filter*过滤器是*JavaEE*的规范，也就是接口。它的作用是：拦截请求，过滤响应
+
+##### 使用
+
+实现*Filter*接口，重写方法
+
+*doFilter*中，使用*chain.doFilter*放行
+
+```java
+public class FilterImpl implements Filter {
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+        System.out.println("filter 初始化了");
+        String filterName = filterConfig.getFilterName();
+        System.out.println("filter的名字是： " + filterName);
+    }
+
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+        System.out.println("进入doFilter方法");
+        // 放行
+        chain.doFilter(request, response);
+        // 
+    }
+
+    @Override
+    public void destroy() {
+        System.out.println("过滤器销毁");
+    }
+}
+```
+
+##### 生命周期
+
+*Filter*在*Tomcat*启动时初始化，在关闭时销毁，每次过滤都会调用*doFilter*方法
+
+##### *Filter*过滤链
+
+当配置多个过滤器的时候，会根据配置的*\<filter-mapping>*的先后顺序执行。执行顺序为先执行前面的请求，再执行后面的请求，请求执行完之后先执行后面的响应，再执行前面的相应。
+
+过滤器执行顺序
+
+![image-20201118150939561](assets/image-20201118150939561.png)
+
+如何做到的？
+
+*Tomcat*的*ApplicationFilterChain*类中源码如下：
+
+![image-20201118151635975](assets/image-20201118151635975.png)
+
+![image-20201118151721751](assets/image-20201118151721751.png)
+
+![image-20201118151803737](assets/image-20201118151803737.png)
+
+我们将响应后的代码放置*doFilter*方法后，当最后一个*filter*走过后会返回上一次调用的地方，这样就可以往前响应。
+
+执行流程如图所示
+
+![image-20201118153345566](assets/image-20201118153345566.png)
+
