@@ -27,12 +27,11 @@
     user2.setName("马云");
     user2.setPassword("123");
 
-
     List<User> userList = new ArrayList();
     userList.add(user1);
     userList.add(user2);
     request.setAttribute("userList", userList);
-    
+
     Map<String, String> hashMap = new HashMap<>();
     hashMap.put("uname", "213");
     request.setAttribute("hashMap", hashMap);
@@ -41,9 +40,9 @@
 
 <h2>
     list:
-    ${userList[1].name}
+    ${userList[1].name} <br/>
     ${userList[0].name} <br/>
-    ${userList[0].password}    <br/>
+    ${userList[0].password} <br/>
 </h2>
 
 map: <br/>
