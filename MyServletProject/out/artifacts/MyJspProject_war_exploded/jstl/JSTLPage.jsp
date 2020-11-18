@@ -56,5 +56,15 @@ ${result}
     ${status.current.password}    <br/>
 </c:forEach>
 
+<br/>
+
+测试set<br/>
+
+<c:set scope="request" var="name" value="zhangsan" target="" property="">
+
+</c:set>
+
+
+
 </body>
 </html>

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.chhoyun.entity.Product" %>
 <%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -42,32 +43,24 @@
     </div>
 
 
-    <%
+    <c:if test="${products != null}">
+        <c:forEach items="${products}" var="product">
+            <div class="col-md-2">
+                <a href="product_info.htm"> <img src=${product.pimage}
+                                                         width="170" height="170" style="display: inline-block;">
+                </a>
+                <p>
+                    <a href="product_info.html" style='color: green'>${product.pname}
+                    </a>
+                </p>
+                <p>
+                    <font color="#FF0000">商城价：&yen;${product.marketPrice}
+                    </font>
+                </p>
+            </div>
 
-        List<Product> products = (List<Product>) request.getAttribute("products");
-        if (products != null) {
-            for (Product product : products) {
-    %>
-
-    <div class="col-md-2">
-        <a href="product_info.htm"> <img src=<%=product.getPimage()%>
-            width="170" height="170" style="display: inline-block;">
-        </a>
-        <p>
-            <a href="product_info.html" style='color: green'><%=product.getPname()%></a>
-        </p>
-        <p>
-            <font color="#FF0000">商城价：&yen;<%=product.getMarketPrice()%>
-            </font>
-        </p>
-    </div>
-
-    <%
-
-            }
-        }
-
-    %>
+        </c:forEach>
+    </c:if>
 
 
 </div>
