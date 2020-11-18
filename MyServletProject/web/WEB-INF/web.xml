@@ -64,5 +64,15 @@
         <servlet-name>servletTest</servlet-name>
         <url-pattern>/servletTest</url-pattern>
     </servlet-mapping>
+
+    <filter-mapping>
+        <filter-name>filterImpl</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>filterImpl</filter-name>
+        <filter-class>com.chhoyun.filter.FilterImpl</filter-class>
+    </filter>
     
 </web-app>
