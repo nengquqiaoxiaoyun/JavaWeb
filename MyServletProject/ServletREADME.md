@@ -357,8 +357,6 @@ session.setMaxInactiveInterval(60 * 20);
 2. 可以执行表达式的运算
 3. 有*11*个内置对象
 
-Version:0.9 StartHTML:0000000105 EndHTML:0000000928 StartFragment:0000000141 EndFragment:0000000888   
-
 #####  *.*点运算 和  *[ ]*  中括号运算符 
 
 使用*[ ]*可以输出一些特出字符，而 *.* 不能
