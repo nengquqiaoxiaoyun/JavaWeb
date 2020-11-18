@@ -378,3 +378,63 @@ session.setMaxInactiveInterval(60 * 20);
 </body>
 ```
 
+#### *JSTL*标签库
+
+*EL* 表达式主要是为了替换 *JSP* 中的表达式脚本，而标签库则是为了替换代码脚本，这样使得整个*JSP*页面更佳简洁
+
+http://archive.apache.org/dist/jakarta/taglibs/standard/binaries/
+
+进入网址下载*JSTL*的安装包并导入
+
+```jsp
+// uri 需要导入的路径 prefix 用来区分不同的标签库
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+```
+
+##### 常用标签
+
+1. ***\<c:if\>***
+
+属性：
+
+```jsp
+// test 表示判断的条件
+// var 表示判断的结果
+// scope 表示var的作用域
+<c:if  test="${num == 2}" var="result" scope="request">
+    ${num}
+    ${result}
+</c:if>
+```
+
+2. ***\<c:forEach\>***
+
+属性：
+
+```jsp
+// items 要遍历的集合对象
+// var 对象的名字
+// varStatus 记录了对象的状态信息，该对象类型为 javax.servlet.jsp.jstl.core.LoopTagStatus
+// begin 遍历开始的位置
+// end 遍历结束的位置
+// step 每次移动的步数
+<c:forEach items="${userList}" varStatus="status" var="user">
+    ${user.name} <br/>
+    ${status.current.password}    <br/>
+</c:forEach>
+```
+
+3. ***\<c:set\>***
+
+属性：
+
+```jsp
+// scope 给哪个域设置值
+// var key
+// value value
+// target 给目标对象传值，必须是Map或者有Setter的对象
+// property 给对象的哪个属性传值
+<c:set scope="request" var="name" value="zhangsan" target="" property="">
+
+</c:set>
+```
