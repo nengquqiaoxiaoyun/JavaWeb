@@ -462,10 +462,10 @@ public class FilterImpl implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        System.out.println("进入doFilter方法");
+        // 前置方法 请求处理
         // 放行
         chain.doFilter(request, response);
-        // 
+        // 后置方法 响应处理
     }
 
     @Override
@@ -502,4 +502,3 @@ public class FilterImpl implements Filter {
 执行流程如图所示
 
 ![image-20201118153345566](assets/image-20201118153345566.png)
-
