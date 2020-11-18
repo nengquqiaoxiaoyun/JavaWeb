@@ -1,16 +1,11 @@
 package com.chhoyun;
 
-import com.sun.media.jfxmediaimpl.HostUtils;
-
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebInitParam;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Enumeration;
 
 /**
  * @author: huakaimay
@@ -27,15 +22,15 @@ public class ServletTest extends HttpServlet {
 
 
         String username = getServletConfig().getInitParameter("username");
-        System.out.println(username);
+        System.out.println("servletTest的username： " + username);
 
         ServletContext servletContext = getServletConfig().getServletContext();
         String context = servletContext.getInitParameter("context");
         String contextPath1 = servletContext.getContextPath();
-        System.out.println("context: " + context);
+        System.out.println("servletTest的context: " + context);
 
         String contextPath = servletContext.getRealPath("/");
-        System.out.println("contextPath: " + contextPath);
+        System.out.println("servletTest的contextPath: " + contextPath);
 
 
     }

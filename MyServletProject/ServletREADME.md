@@ -502,3 +502,6 @@ public class FilterImpl implements Filter {
 执行流程如图所示
 
 ![image-20201118153345566](assets/image-20201118153345566.png)
+
+##### 全局处理乱码
+

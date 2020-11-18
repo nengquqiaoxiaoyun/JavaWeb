@@ -20,7 +20,6 @@ public class FilterImpl implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, javax.servlet.FilterChain chain) throws IOException, ServletException {
-        System.out.println("进入doFilter方法");
 
         System.out.println("请求");
         // 放行
