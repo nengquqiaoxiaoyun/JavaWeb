@@ -449,7 +449,7 @@ http://archive.apache.org/dist/jakarta/taglibs/standard/binaries/
 </c:set>
 ```
 
-#### *Filter*过滤器
+#### *Filter*过滤器 责任链模式
 
 *Filter*过滤器是*JavaEE*的规范，也就是接口。它的作用是：拦截请求，过滤响应
 
@@ -483,6 +483,21 @@ public class FilterImpl implements Filter {
 }
 ```
 
+##### 配置
+
+```xml
+<filter>
+    <filter-name>encodingFilter</filter-name>
+    <filter-class>com.chhoyun.filter.EncodingFilter</filter-class>
+</filter>
+
+<filter-mapping>
+    <filter-name>encodingFilter</filter-name>
+    // 匹配过滤路径
+    <url-pattern>/encodingCode/*</url-pattern>
+</filter-mapping>
+```
+
 ##### 生命周期
 
 *Filter*在*Tomcat*启动时初始化，在关闭时销毁，每次过滤都会调用*doFilter*方法
@@ -511,4 +526,44 @@ public class FilterImpl implements Filter {
 
 ![image-20201118153345566](assets/image-20201118153345566.png)
 
-##### 全局处理乱码
+#### *Listerner*监听器 观察者模式
+
+```text
+	6个常规监听器
+    |---ServletContext
+            |---ServletContextListener（生命周期监听）
+            |---ServletContextAttributeListener（属性监听）
+    |---HttpSession
+            |---HttpSessionListener（生命周期监听）
+            |---HttpSessionAttributeListener（属性监听）
+    |---ServletRequest
+            |---ServletRequestListener（生命周期监听）
+            |---ServletRequestAttributeListener（属性监听）
+
+	2个感知监听 感知监听器不需要配置web.mxl
+    |---HttpSessionBindingListener 对象绑定到session或从session中解绑
+    |---HttpSessionActivationListener 钝化与活化
+	将一个对象存入到session域中，如果session被钝化（序列化）到磁盘上或者从磁盘上活化（反序列化）时都会被该监听器监听
+```
+
+##### 使用
+
+实现要监听的接口，重写方法
+
+##### 配置
+
+```xml
+<listener>
+    <listener-class>com.chhoyun.listener.MyListener</listener-class>
+</listener>
+```
+
+##### 生命周期
+
+*ServletContextListtener*在*Tomcat*启动时创建，关闭时销毁
+
+*ServletRequestListener*在发起请求时创建，请求结束时销毁
+
+*HttpSessionListener*在*request.getSession*时创建，*session*销毁时销毁，如果在*session*生命周期内多次*getSession*也只有第一次*JSESSIONID*找不到对于的*session*时才会创建
+
+属性监听器在各域进行*set/removeAttribute*时触发监听 （触发*add*、*replace*、*remove*，*get*不能触发）
