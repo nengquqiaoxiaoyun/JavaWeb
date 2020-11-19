@@ -1,4 +1,4 @@
-<%--
+<%@ page import="java.io.PrintWriter" %><%--
   Created by IntelliJ IDEA.
   User: wentimei
   Date: 2020/11/18
@@ -11,6 +11,18 @@
     <title>Title</title>
 </head>
 <body>
+
+<%
+    out.print("张三");
+    PrintWriter writer = response.getWriter();
+    out.write("张三");
+    writer.println("张三");
+%>
+
+<br/>
+
+<%="李四"%>
+
 
 姓名：<%=request.getParameter("username")%>         <br/>
 response: <%=response.getCharacterEncoding()%> <br/>

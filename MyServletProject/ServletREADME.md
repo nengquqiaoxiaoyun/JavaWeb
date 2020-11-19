@@ -179,6 +179,8 @@ request.getRequestDispatcher("sessionDemo/session.jsp").forward(request, respons
 
 ##### 响应乱码
 
+在*Servle*t中，响应流输出中文会发生乱码，采用如下方式：
+
 第一种方式：
 
 ```java
@@ -196,6 +198,12 @@ resp.setHeader("Content-Type", "text/html; charset=UTF-8");
   此方法一定要在获取流对象之前调用才有效 
 */
 resp.setContentType("text/html; charset=UTF-8");
+```
+
+在*JSP*中只需要设置页面的编码即可
+
+```jsp
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 ```
 
 ##### 重定向
@@ -318,7 +326,7 @@ session.setMaxInactiveInterval(60 * 20);
 
 ##### 九大内置对象
 
-*jsp*内置对象可以直接使用
+*Jsp*内置对象可以直接使用
 
 1. *Request:*
 2. *Response:*
@@ -504,4 +512,3 @@ public class FilterImpl implements Filter {
 ![image-20201118153345566](assets/image-20201118153345566.png)
 
 ##### 全局处理乱码
-
