@@ -19,6 +19,8 @@ public class JDBCUtils {
 
     private static DataSource druidDataSource;
 
+
+
     static {
         try {
             InputStream is = JDBCUtils.class.getClassLoader().getResourceAsStream("druid.properties");
