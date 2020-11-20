@@ -47,8 +47,9 @@
                     <label for="username" class="col-sm-2 control-label">用户名</label>
                     <div class="col-sm-6">
                         <input type="text" class="form-control" id="username" name="username"
-                               placeholder="请输入用户名">
+                               placeholder="请输入用户名" onblur="checkName()">
                     </div>
+                    <span id="check"></span>
                 </div>
                 <div class="form-group">
                     <label for="inputPassword3" class="col-sm-2 control-label">密码</label>
@@ -128,6 +129,34 @@
 <jsp:include page="/footer.jsp"></jsp:include>
 
 </body>
+
+
+<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript">
+
+    // 用户名校验
+    function checkName() {
+        let username = $("#username").val()
+        $.ajax({
+            url: "checkNameServlet",
+            type: "get",
+            data: {"username": username},
+            success: function (res) {
+
+                if ("yes" == res.isExist) {
+                    $("#check").html("用户名已存在").css("color", "red")
+
+                } else {
+                    $("#check").html("用户名可用").css("color", "green")
+
+                }
+
+            },
+            dataType: "json"
+        })
+    }
+
+</script>
 </html>
 
 

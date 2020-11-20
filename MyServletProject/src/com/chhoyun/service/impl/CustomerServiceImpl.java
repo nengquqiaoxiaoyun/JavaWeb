@@ -27,4 +27,9 @@ public class CustomerServiceImpl implements CustomerService {
         return customerDao.findUserByUsernameAndPassword(connection, username, password);
     }
 
+    @Override
+    public Customer finUserByUsername(Connection connection, String username) {
+        return customerDao.findUserByUsername(connection, username);
+    }
+
 }

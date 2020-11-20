@@ -14,4 +14,6 @@ public interface CustomerDao {
 
 
     Customer findUserByUsernameAndPassword(Connection con, String username, String password);
+
+    Customer findUserByUsername(Connection con, String username);
 }

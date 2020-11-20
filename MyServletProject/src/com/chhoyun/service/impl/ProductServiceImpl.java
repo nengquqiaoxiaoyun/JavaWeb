@@ -19,4 +19,9 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> listProducts() {
         return productDao.listProducts();
     }
+
+    @Override
+    public List<String> listProductsNameByInput(String val) {
+        return productDao.listProductsNameByInput(val);
+    }
 }

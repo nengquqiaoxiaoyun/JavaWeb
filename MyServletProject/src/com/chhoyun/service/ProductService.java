@@ -18,4 +18,9 @@ public interface ProductService {
     List<Product> listProducts();
 
 
+    /**
+     * 模糊查询商品名称
+     * @return
+     */
+    List<String> listProductsNameByInput(String val);
 }

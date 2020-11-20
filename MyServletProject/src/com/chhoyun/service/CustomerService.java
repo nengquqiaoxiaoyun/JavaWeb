@@ -14,4 +14,6 @@ public interface CustomerService {
     void register(Connection con, Customer customer);
 
     Customer findUserByUsernameAndPassword(Connection connection, String username, String password);
+
+    Customer finUserByUsername(Connection connection, String username);
 }

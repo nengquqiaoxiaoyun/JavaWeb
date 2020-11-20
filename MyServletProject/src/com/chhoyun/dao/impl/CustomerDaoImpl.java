@@ -25,4 +25,11 @@ public class CustomerDaoImpl extends BaseDao<Customer> implements CustomerDao {
                 "from user where username = ? and password = ?";
         return super.getBean(con, sql, username, password);
     }
+
+    @Override
+    public Customer findUserByUsername(Connection con, String username) {
+        String sql = "select uid, username, password, email, name, birthday, sex " +
+                "from user where username = ?";
+        return super.getBean(con, sql, username);
+    }
 }

@@ -4,6 +4,7 @@ import com.chhoyun.util.JDBCUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ColumnListHandler;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -52,6 +53,7 @@ public abstract class BaseDao<T> {
 
     }
 
+    // 不需要传connectin 自己关闭
     public List<T> getBeanList(String sql, Object... args) {
 
         try {
@@ -62,6 +64,8 @@ public abstract class BaseDao<T> {
         }
         return null;
     }
+
+
 
 
 }

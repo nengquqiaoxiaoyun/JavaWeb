@@ -1,7 +1,5 @@
 package com.chhoyun.entity;
 
-import java.time.LocalDate;
-
 /**
  * @author: huakaimay
  * @since: 2020-11-11
