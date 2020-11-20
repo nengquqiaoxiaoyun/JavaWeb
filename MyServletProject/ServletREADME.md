@@ -10,7 +10,7 @@
 
 *DefaultServlet*是默认的*Servlet*，它匹配所有的路径，优先级最低
 
-当浏览器找不到对应的Servlet处理时，就由DefaultServlet处理：
+当浏览器找不到对应的*Servlet*处理时，就由*DefaultServlet*处理：
 
 静态资源能找到就读取并相应
 
@@ -258,7 +258,7 @@ resp.sendRedirect("http://localhost:8080");
  response.sendRedirect("/servletProject/sessionDemo/session.jsp");
 ```
 
-#### *Cookie*
+### *Cookie*
 
  *Cookie*是将用户的信息保存到**客户端**浏览器的一个技术,当下次访问的时候,浏览器会自动携带*Cookie*的信息过来到服务器端.
 
@@ -268,7 +268,7 @@ resp.sendRedirect("http://localhost:8080");
 
 **相当于本地缓存的作用，可以提高效率，但是不够安全，最多只能存储*4kb*的数据，*key*和*value*都是*String*类型的**
 
-##### 生存时间
+#### 生存时间
 
 *Cookie*的默认生成时间是一次会话，*cookie.setMaxAge()*可以设置生存时间，单位为秒
 
@@ -284,19 +284,19 @@ cookie.setMaxAge(0);
 response.addCookie(cookie);
 ```
 
-#### *Session*
+### *Session*
 
 *Session*就是会话，它是用来维护一个客户端和服务器之间关联的一种技术
 
 相比较*Cookie*存在客户端，*Session*则是服务端的东西
 
-##### *Session*机制
+#### *Session*机制
 
 客户端第一次访问服务端时，服务端会产生一个*session*对象（用于存储客户信息），并且每个*session*对象都有一个唯一的*sessionId*（用于区分其他*session*）。服务端还会产生一个*cookie*，*name=JSESSIONID，value=sessionId*。服务端会在响应客户端的时候将*cookie*发送给客户端。因此客户端就有了*cookie*和服务端*session*一一对应。
 
 也就是说当客户端访问服务器，看是否有*cookie（JESSIONID）*能和服务端的*session（sessionId）*对应起来，没有则创建
 
-##### 生命周期
+#### 生命周期
 
 在 *Tomcat* 服务器的配置文件 *web.xml*中默认有以下的配置，它就表示配置了当前 *Tomcat* 服务器下所有的 *Session* 
 
@@ -314,11 +314,11 @@ response.addCookie(cookie);
 
 > [浏览器关闭后，Session就销毁了吗？](https://blog.csdn.net/QQ1012421396/article/details/70842148)
 
-###### *Session*序列化
+##### *Session*序列化
 
 当服务器关闭之后，会生成一个叫*SESSIONS.ser*的文件用来保存所有的session信息，该文件生成在*Tomcat*的*work/Catalina/localhost/项目*下。当启动服务器是，该文件被读取并销毁。
 
-##### 使用
+#### 使用
 
 ```java
 // 获取session
@@ -335,7 +335,7 @@ session.remoteAttribute("");
 session.setMaxInactiveInterval(60 * 20);
 ```
 
-#### *JSP*
+### *JSP*
 
 *JSP*全称*Java Server Page*，直译就是“运行在服务器端的页面”。我们可以直接在*JSP*文件里写*HTML*代码，使用上把它**当做** *HTML*文件。我们还可以把*Java*代码内嵌在*JSP*页面中，很方便地把动态数据渲染成静态页面。
 
@@ -350,7 +350,7 @@ session.setMaxInactiveInterval(60 * 20);
 >
 > 来源：https://zhuanlan.zhihu.com/p/42343690
 
-##### 九大内置对象
+#### 九大内置对象
 
 *Jsp*内置对象可以直接使用
 
@@ -364,7 +364,7 @@ session.setMaxInactiveInterval(60 * 20);
 8. *Page:*
 9. *Exception:*
 
-##### 四大作用域
+#### 四大作用域
 
 所有的作用域都有三个一样的方法： ***(setAttribute, getAttribute, removeAttribute)***
 
@@ -373,7 +373,7 @@ session.setMaxInactiveInterval(60 * 20);
 - *Session：*作用于一次会话
 - *Application：*整个项目有效（重启或其他项目无效，可以使用*JNDI*解决）
 
-#### *EL*表达式
+### *EL*表达式
 
 *EL（Express Lanuage）*表达式可以嵌入在*JSP*页面内部，减少*JSP*脚本的编写，***EL*出现的目的是要替代*JSP*页面中脚本的编写**
 
@@ -387,13 +387,13 @@ session.setMaxInactiveInterval(60 * 20);
 
 **如果值为*null*，*EL*将展示位空字符串**
 
-##### *EL*的三个作用
+#### *EL*的三个作用
 
 1. 可以从域中取值
 2. 可以执行表达式的运算
 3. 有*11*个内置对象
 
-#####  *.*点运算 和  *[ ]*  中括号运算符 
+####  *.*点运算 和  *[ ]*  中括号运算符 
 
 使用*[ ]*可以输出一些特出字符，而 *.* 不能
 
@@ -414,7 +414,7 @@ session.setMaxInactiveInterval(60 * 20);
 </body>
 ```
 
-#### *JSTL*标签库
+### *JSTL*标签库
 
 *EL* 表达式主要是为了替换 *JSP* 中的表达式脚本，而标签库则是为了替换代码脚本，这样使得整个*JSP*页面更佳简洁
 
@@ -427,7 +427,7 @@ http://archive.apache.org/dist/jakarta/taglibs/standard/binaries/
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 ```
 
-##### 常用标签
+#### 常用标签
 
 1. ***\<c:if\>***
 
@@ -473,13 +473,15 @@ http://archive.apache.org/dist/jakarta/taglibs/standard/binaries/
 <c:set scope="request" var="name" value="zhangsan" target="" property="">
 
 </c:set>
+
+可以设置为 var 和 value 用来接收一个值
 ```
 
-#### *Filter*过滤器 责任链模式
+### *Filter*过滤器 责任链模式
 
 *Filter*过滤器是*JavaEE*的规范，也就是接口。它的作用是：拦截请求，过滤响应
 
-##### 使用
+#### 使用
 
 实现*Filter*接口，重写方法
 
@@ -509,7 +511,7 @@ public class FilterImpl implements Filter {
 }
 ```
 
-##### 配置
+#### 配置
 
 ```xml
 <filter>
@@ -524,11 +526,11 @@ public class FilterImpl implements Filter {
 </filter-mapping>
 ```
 
-##### 生命周期
+#### 生命周期
 
 *Filter*在*Tomcat*启动时初始化，在关闭时销毁，每次过滤都会调用*doFilter*方法
 
-##### *Filter*过滤链
+#### *Filter*过滤链
 
 当配置多个过滤器的时候，会根据配置的*\<filter-mapping>*的先后顺序执行。执行顺序为先执行前面的请求，再执行后面的请求，请求执行完之后先执行后面的响应，再执行前面的相应。
 
@@ -552,7 +554,7 @@ public class FilterImpl implements Filter {
 
 ![image-20201118153345566](assets/image-20201118153345566.png)
 
-#### *Listerner*监听器 观察者模式
+### *Listerner*监听器 观察者模式
 
 ```text
 	6个常规监听器
@@ -572,11 +574,11 @@ public class FilterImpl implements Filter {
 	将一个对象存入到session域中，如果session被钝化（序列化）到磁盘上或者从磁盘上活化（反序列化）时都会被该监听器监听
 ```
 
-##### 使用
+#### 使用
 
 实现要监听的接口，重写方法
 
-##### 配置
+#### 配置
 
 ```xml
 <listener>
@@ -584,7 +586,7 @@ public class FilterImpl implements Filter {
 </listener>
 ```
 
-##### 生命周期
+#### 生命周期
 
 *ServletContextListtener*在*Tomcat*启动时创建，关闭时销毁
 
@@ -593,3 +595,148 @@ public class FilterImpl implements Filter {
 *HttpSessionListener*在*request.getSession*时创建，*session*销毁时销毁，如果在*session*生命周期内多次*getSession*也只有第一次*JSESSIONID*找不到对于的*session*时才会创建
 
 属性监听器在各域进行*set/removeAttribute*时触发监听 （触发*add*、*replace*、*remove*，*get*不能触发）
+
+### Ajax
+
+*Ajax*是一种动态的网页开发技术，可以使网页实现异步刷新，就不是重新加载整个网页的情况下，对网页的某部分进行更新。传统的网页（不使用 *Ajax*）如果需要更新内容，必须重载整个网页页面
+
+#### 同步&异步
+
+同步：客户端发送请求到服务器端，当服务器返回响应之前，客户端都处于等待卡死状态
+
+异步：客户端发送请求到服务器端，无论服务器是否返回响应，客户端都可以随意做其他事情，不会被卡死
+
+#### 原生*Ajax*
+
+*js*原生的*Ajax*其实就是围绕浏览器内内置的*Ajax*引擎对象进行学习的，要使用*js*原生的*Ajax*完成异步操作，有如下几个步骤：
+
+1. 创建Ajax引擎对象
+2. 为Ajax引擎对象绑定监听（监听服务器将数据响应给引擎）
+3. 绑定提交地址
+4. 发送请求
+5. 接受响应数据
+
+![image-20201120104152076](assets/image-20201120104152076.png)
+
+##### 使用案列
+
+```javascript
+// post
+function js_ajax_post() {
+    // 1.创建一个js的ajax对象。
+    var request = new XMLHttpRequest();
+
+    request.onreadystatechange = function () {
+        // 我们的代码应该在请求发出，并且成功的接收到响应 的情况下，才去做页面相应数据的刷新。
+        // 而且应该 保证响应的状态码为200的情况下才执行数据的刷新。
+        if (request.readyState == 4 && request.status == 200) {
+            alert("ssss");
+        }
+    }
+
+
+    request.open("post", "${root}/demoServlet1", true);
+    // post提交必须手动设置这个请求 头，就是以url格式提交参数。必须放在open方法的下面。
+    request.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+    // 4.发送请求
+    request.send("username=zhangsan");
+}
+
+
+// get
+function js_ajax_async() {
+    // 1.创建一个js的ajax对象。
+    var request = new XMLHttpRequest();
+    // 2.给这个对象绑定事件
+    request.onreadystatechange = function () {
+        // 我们的代码应该在请求发出，并且成功的接收到响应 的情况下，才去做页面相应数据的刷新。
+        // 而且应该 保证响应的状态码为200的情况下才执行数据的刷新。
+        if (request.readyState == 4 && request.status == 200) {
+            alert(request.responseText);
+        }
+    }
+    request.open("get", "${root}/demoServlet1?username=zhangsan", true);
+
+    // 4.发送请求
+    request.send();
+}
+```
+
+#### *JQuery*的*Ajax*
+
+*JQuery*对原生*Ajax*进行了封装，封装后使用更简洁、功能更强大
+
+##### *get*
+
+![img](assets/wpsmtu2H4-5840680.jpg)
+
+###### 使用案例
+
+```javascript
+ /*
+  第一个参数：url:必须的，请求的地址
+  第二个参数：data:可选的，请求的参数，一般是一个json
+  第三个参数：callback:可选的，回调函数。   回调函数的参数就是响应体的内容
+ */
+function jqueryAjax2() {
+    $.get("demoServlet1",{"username":"lisi"}, function(data) {
+        alert(data)
+    })
+}
+```
+
+##### *post*
+
+![img](assets/wpsfdZsGL.jpg)
+
+###### 使用案列
+
+```javascript
+ /*
+  第一个参数：url:必须的，请求的地址
+  第二个参数：data:可选的，请求的参数，一般是一个json
+  第三个参数：callback:可选的，回调函数。   回调函数的参数就是响应体的内容
+ */
+function jquertAjax2() {
+	$.post("demoServlet1",{"username":"zhangsan"},function(data){
+ 		alert(data)
+ 	})
+}
+```
+
+##### *ajax*
+
+*get*和*post*默认都是异步请求，要使用同步请求就要使用*ajax*方法，设置*async*为*false*即为同步，默认为异步
+
+```javascript
+$.ajax({ 
+    option1:value1,
+	option2:value2... 
+})
+```
+
+常用参数有：
+
+1. *async：*是否异步
+2. *data：*发送到服务端的参数，默认为*json*格式
+3. *dataType*：服务端返回的数据类型，常用*text*和*json*，默认为*text*
+4. *success：*响应成功后执行的函数
+5. *type：*请求提交方式，*get/post*
+6. *url：*请求地址
+
+###### 使用案列
+
+```javascript
+function jqueryAjax3() {
+        $.ajax({
+            url: "/demoServlet1",
+            data: {"username": "王五"},
+            type: "post",
+            success: function (resp) {
+                alert("success")
+                alert(resp)
+            },
+            dataType: "text"
+        })
+    }
+```
