@@ -211,9 +211,9 @@ request.getRequestDispatcher("sessionDemo/session.jsp").forward(request, respons
 
 ```java
 // 设置服务器字符集为 UTF-8 
-resp.setCharacterEncoding("UTF-8"); 
+response.setCharacterEncoding("UTF-8"); 
 // 通过响应头，设置浏览器也使用 UTF-8 字符集 
-resp.setHeader("Content-Type", "text/html; charset=UTF-8");
+response.setHeader("Content-Type", "text/html; charset=UTF-8");
 ```
 
 第二种方式：
@@ -223,7 +223,7 @@ resp.setHeader("Content-Type", "text/html; charset=UTF-8");
   它会同时设置服务器和客户端都使用 UTF-8 字符集，还设置了响应头
   此方法一定要在获取流对象之前调用才有效 
 */
-resp.setContentType("text/html; charset=UTF-8");
+response.setContentType("text/html; charset=UTF-8");
 ```
 
 在*JSP*中只需要设置页面的编码即可
@@ -238,15 +238,15 @@ resp.setContentType("text/html; charset=UTF-8");
 
 ```java
 // 设置响应状态码 302 ，表示重定向
-resp.setStatus(302); 
+response.setStatus(302); 
 // 设置响应头，说明 新的地址在哪里 
-resp.setHeader("Location", "http://localhost:8080");
+response.setHeader("Location", "http://localhost:8080");
 ```
 
 第二种方式：
 
 ```java
-resp.sendRedirect("http://localhost:8080");
+response.sendRedirect("http://localhost:8080");
 ```
 
 ###### 重定向的路径
