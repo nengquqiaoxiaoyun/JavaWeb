@@ -1,3 +1,29 @@
+### *Tomcat*
+
+目录结构：
+
+![preview](assets/v2-d8b75829a65958c65d50781155ae80a1_r.jpg)
+
+#### *DefaultServlet*
+
+![image-20201120092122430](assets/image-20201120092122430.png)
+
+*DefaultServlet*是默认的*Servlet*，它匹配所有的路径，优先级最低
+
+当浏览器找不到对应的Servlet处理时，就由DefaultServlet处理：
+
+静态资源能找到就读取并相应
+
+动/静态资源找不到就响应*404*
+
+##### *JspServlet*
+
+![image-20201120092728812](assets/image-20201120092728812.png)
+
+动态资源*(Jsp)*能找到，会被转换成*Servlet*并相应，不需要另外的*Servlet*
+
+**.jsp*这样的资源交由*JspServlet*处理，它将把找到的*Jsp*转换为*Servlet*
+
 #### 虚拟路径（*tomcat*官方推荐部署方式）
 
 通常我们将项目放在*tomcat*的*webapps*目录下，我们还可以采用以下方式：
