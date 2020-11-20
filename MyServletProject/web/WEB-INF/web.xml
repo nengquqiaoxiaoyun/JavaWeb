@@ -76,11 +76,5 @@
         <url-pattern>/encodingCode/*</url-pattern>
     </filter-mapping>
     
-    <listener>
-        <listener-class>com.chhoyun.listener.MyListener</listener-class>
-    </listener>
-    <listener>
-        <listener-class>com.chhoyun.listener.MyAttributeLister</listener-class>
-    </listener>
-    
+
 </web-app>
