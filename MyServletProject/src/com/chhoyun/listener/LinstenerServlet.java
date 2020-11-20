@@ -19,8 +19,6 @@ public class LinstenerServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        response.getWriter().write(session.getId());
 
         
         request.setAttribute("unamez", null);
