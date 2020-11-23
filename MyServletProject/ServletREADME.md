@@ -44,6 +44,8 @@
 
 ### *Servlet*
 
+*Servlet：* 运行在服务端的Java*小程序*，是*sun*公司提供一套规范，用**来处理客户端请求、响应给浏览器的动态资源**
+
 #### *servlet*中路径总结
 
 1. *web.xml*
@@ -67,7 +69,13 @@
 
 https://www.cnblogs.com/deng-cc/p/7152988.html
 
-*Servlet：* 运行在服务端的Java*小程序*，是*sun*公司提供一套规范，用**来处理客户端请求、响应给浏览器的动态资源**
+```java
+// 不能以 / 开头，这样是从classpath（src）下获取资源
+InputStream resourceAsStream = JdbcUtils.class.getClassLoader().getResourceAsStream("druid.properties");
+
+// 如果以 / 开头，就是从classpath下获取资源，不以 / 开头，就从当前文件所在包下获取资源
+ InputStream resourceAsStream =  JdbcUtils.class.getResourceAsStream("/druid.properties");
+```
 
 #### *Servlet*生命周期
 
