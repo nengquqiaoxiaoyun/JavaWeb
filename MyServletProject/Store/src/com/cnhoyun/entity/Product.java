@@ -10,7 +10,7 @@ public class Product {
 
     private String pid;
     private String pname;
-    private BigDecimal marketPprice;
+    private BigDecimal marketPrice;
     private BigDecimal shopPrice;
     private String pimage;
     private String pdate;
@@ -35,12 +35,13 @@ public class Product {
         this.pname = pname;
     }
 
-    public BigDecimal getMarketPprice() {
-        return marketPprice;
+
+    public BigDecimal getMarketPrice() {
+        return marketPrice;
     }
 
-    public void setMarketPprice(BigDecimal marketPprice) {
-        this.marketPprice = marketPprice;
+    public void setMarketPrice(BigDecimal marketPrice) {
+        this.marketPrice = marketPrice;
     }
 
     public BigDecimal getShopPrice() {
@@ -104,7 +105,7 @@ public class Product {
         return "Product{" +
                 "pid='" + pid + '\'' +
                 ", pname='" + pname + '\'' +
-                ", marketPprice=" + marketPprice +
+                ", marketPrice=" + marketPrice +
                 ", shopPrice=" + shopPrice +
                 ", pimage='" + pimage + '\'' +
                 ", pdate='" + pdate + '\'' +

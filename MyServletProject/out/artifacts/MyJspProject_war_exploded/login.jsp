@@ -81,6 +81,8 @@
                                    placeholder="请输入用户名" value="<%=username == null ? "" : username %>">
                         </div>
                     </div>
+
+
                     <div class="form-group">
                         <label for="password" class="col-sm-2 control-label">密码</label>
                         <div class="col-sm-6">
@@ -128,4 +130,5 @@
 <jsp:include page="/footer.jsp"></jsp:include>
 
 </body>
+
 </html>

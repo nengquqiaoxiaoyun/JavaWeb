@@ -5,21 +5,19 @@
 <HEAD>
     <meta http-equiv="Content-Language" content="zh-cn">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link href="${pageContext.request.contextPath}/css/Style1.css"
+    <link href="${root}/css/Style1.css"
           rel="stylesheet" type="text/css"/>
     <script language="javascript"
             src="../../js/public.js"></script>
     <script type="text/javascript">
         function addProduct() {
-            window.location.href = "${root}/admin/product/add.jsp";
+            window.location.href = "${root}/category";
         }
     </script>
 </HEAD>
 <body>
 <br>
-<form id="Form1" name="Form1"
-      action="../productList"
-      method="post">
+
     <table cellSpacing="1" cellPadding="0" width="100%" align="center"
            bgColor="#f5fafe" border="0">
         <TBODY>
@@ -76,7 +74,7 @@
                                 width="10%">${product.category.cname}
                             </td>
                             <td align="center" style="HEIGHT: 22px"><a
-                                    href="${root}/admin/product/edit.jsp">
+                                    href="${root}/getProduct?pid=${product.pid}" >
                                 <img
                                         src="${root}/images/i_edit.gif"
                                         border="0" style="CURSOR: hand">
@@ -94,7 +92,6 @@
 
         </TBODY>
     </table>
-</form>
 </body>
 </HTML>
 
