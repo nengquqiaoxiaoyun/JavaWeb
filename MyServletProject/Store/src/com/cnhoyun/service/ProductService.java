@@ -1,5 +1,6 @@
 package com.cnhoyun.service;
 
+import com.cnhoyun.dto.PageBean;
 import com.cnhoyun.entity.Product;
 
 import java.sql.Connection;
@@ -30,4 +31,15 @@ public interface ProductService {
      * 编辑商品
      */
     void editProduct(Connection con, Product product) throws SQLException;
+
+    /**
+     * 根据pid删除product
+     */
+    void deleteProductByPid(Connection con, String pid) throws SQLException;
+
+    /**
+     * 封装pagebean
+     * @return
+     */
+    PageBean<Product> findPage(int currentPage);
 }

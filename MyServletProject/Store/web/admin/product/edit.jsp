@@ -68,7 +68,7 @@
                 所属分类：
             </td>
             <td class="ta_01" bgColor="#ffffff" colspan="3">
-                <select name="cname">
+                <select name="cid">
                     <c:forEach items="${requestScope.categories}" var="category">
                         <option value="${category.cid}" ${category.cid == requestScope.product.category.cid ? "selected = 'selected'" : ""}>${category.cname}</option>
                     </c:forEach>

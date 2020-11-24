@@ -8,6 +8,7 @@ import com.cnhoyun.utils.JdbcUtils;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.dbutils.handlers.MapHandler;
 import org.apache.commons.dbutils.handlers.MapListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -80,11 +81,37 @@ public class ProductDaoImpl extends BaseDao<Product> implements ProductDao {
 
     @Override
     public void editProduct(Connection con, Product product) throws SQLException {
-        String sql = "update product, category set pname = ?, market_price = ?, shop_price = ?,  pimage = ?, is_hot = ?, pdesc = ?, category.cid = ?, cname = ? where pid = ? and category.cid = product.cid";
+        String sql = "UPDATE product SET pname = ?, market_price = ?, shop_price = ?, " +
+                "pimage = ?, is_hot = ?, pdesc = ?, cid = ? WHERE pid = ?";
 
         super.update(con, sql, product.getPname(), product.getMarketPrice(), product.getShopPrice(),
-                product.getPimage(), product.getIsHot(), product.getPdesc(), product.getCategory().getCid(), product.getCategory().getCname(), product.getPid());
+                product.getPimage(), product.getIsHot(), product.getPdesc(), product.getCategory().getCid(), product.getPid());
 
+    }
+
+    @Override
+    public void deleteProductByPid(Connection con, String pid) throws SQLException {
+        String sql = "delete from product where pid = ?";
+        super.update(con, sql, pid);
+    }
+
+    @Override
+    public long getCount() {
+        String sql = "select count(1) from product";
+        ScalarHandler<Long> scalarHandler = new ScalarHandler<>();
+        try {
+            return super.getQueryRunnerWithDataSource().query(sql, scalarHandler);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return -1;
+    }
+
+    @Override
+    public List<Product> currentData(int start, int end) {
+        String sql = "select pid, pname, market_price marketPrice, shop_price shopPrice, pimage, " +
+                "pdate, is_hot isHot, pdesc, cid from product limit ?, ?";
+        return super.listBean(sql, start, end);
     }
 
 }

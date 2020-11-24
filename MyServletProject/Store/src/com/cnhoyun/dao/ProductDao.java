@@ -34,4 +34,23 @@ public interface ProductDao {
      * 编辑商品
      */
     void editProduct(Connection con, Product product) throws SQLException;
+
+    /**
+     * 根据pid删除product
+     */
+    void deleteProductByPid(Connection con, String pid) throws SQLException;
+
+    /**
+     * 返回所有数据条数
+     */
+    long getCount();
+
+
+    /**
+     * 返回指定的数据
+     * @param start 根据当前页面算出的开始条件
+     * @param end 根据当前页面算出的结束条件
+     * @return
+     */
+    List<Product> currentData(int start, int end);
 }

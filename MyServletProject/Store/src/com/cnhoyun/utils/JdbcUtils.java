@@ -17,6 +17,7 @@ import java.util.Properties;
  */
 public class JdbcUtils {
     private static DataSource dataSource;
+    private static ThreadLocal<Connection> threadLocal = new ThreadLocal();
 
     static {
         try {
@@ -31,7 +32,13 @@ public class JdbcUtils {
     }
 
     public static Connection getConnection() throws SQLException {
-        return dataSource.getConnection();
+        Connection connection = threadLocal.get();
+        if (connection == null) {
+            connection = dataSource.getConnection();
+            threadLocal.set(connection);
+        }
+
+        return connection;
     }
 
     public static DataSource getDataSource() {
