@@ -129,6 +129,20 @@ InputStream resourceAsStream = JdbcUtils.class.getClassLoader().getResourceAsStr
 
 *Tomcat*会把每次请求的*HTTP*协议信息解析好封装到*HttpServletRequst*中，传递到*service（doGet、doPost）*中给我们使用。通过*HttpServletRequst*，可以获取到所有的请求信息。
 
+##### 获取多选框的值
+
+```jsp
+	<select name="cid">
+ 		<c:forEach items="${requestScope.categories}" var="category">
+			<option value="${category.cid}" 
+${category.cid == requestScope.product.category.cid ? "selected = 'selected'" : ""}>${category.cname}
+            </option>
+		</c:forEach>
+	</select>
+```
+
+通过*request.getParameter()*获取到的*select*中*option*的值，如果*option*的*value*有值就取*value*的值，如果没有就取*option*标签中间的值
+
 ##### 获取中文参数乱码
 
 原因：页面提交的参数是以*utf-8*进行编码的，而服务端获取参数时使用的*iso8859-1*,编解码不一致导致了乱码
@@ -149,7 +163,7 @@ InputStream resourceAsStream = JdbcUtils.class.getClassLoader().getResourceAsStr
 
 ##### *request*生命周期
 
-发送请求时创建，请求结束时销毁
+**发送请求时创建，请求结束时销毁**
 
 ##### *request*域对象
 
