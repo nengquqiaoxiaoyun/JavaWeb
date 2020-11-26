@@ -173,7 +173,13 @@ ${category.cid == requestScope.product.category.cid ? "selected = 'selected'" : 
 
 ##### *request*请求转发
 
-请求转发只能在项目内转发
+**请求转发只能在项目内转发**
+
+##### ！！！转发后静态资源问题
+
+静态资源如果是相对路径，那么是相对于页面而言的。请求转发的路径并不会改变，转发后的页面如果是相对路径，那么就是相对于转发后的路径。导致静态资源找不到
+
+![image-20201126131742295](assets/image-20201126131742295.png)
 
 获得请求转发器：
 
@@ -290,6 +296,22 @@ response.sendRedirect("http://localhost:8080");
 
 **相当于本地缓存的作用，可以提高效率，但是不够安全，最多只能存储*4kb*的数据，*key*和*value*都是*String*类型的**
 
+#### ！！！作用范围
+
+*cookie*作用范围默认在当前文件下（初次生成的时候）
+
+![image-20201126154500980](assets/image-20201126154500980.png)
+
+如图，如果我在该*servlet*下生成一个*cookie*，那么他默认就作用于*localhost:port/项目名/servlet*这个路径下面，其他路径下此*cookie*并不能有效使用。
+
+##### 请求路径
+
+```java
+cookie.setPath(request.getContextPath());
+```
+
+这样就可以设置*cookie*作用与项目下
+
 #### 生存时间
 
 *Cookie*的默认生成时间是一次会话，*cookie.setMaxAge()*可以设置生存时间，单位为秒
@@ -320,9 +342,7 @@ response.addCookie(cookie);
 
 #### 生命周期
 
-在 *Tomcat* 服务器的配置文件 *web.xml*中默认有以下的配置，它就表示配置了当前 *Tomcat* 服务器下所有的 *Session* 
-
-超时配置默认时长为：*30* 分钟。 
+在 *Tomcat* 服务器的配置文件 *web.xml*中默认有以下的配置，它就表示配置了当前 *Tomcat* 服务器下所有的 *Session* 超时配置默认时长为：*30* 分钟。 
 
 ![image-20201116161918558](assets/image-20201116161918558.png)
 
@@ -413,7 +433,7 @@ session.setMaxInactiveInterval(60 * 20);
 
 1. 可以从域中取值
 2. 可以执行表达式的运算
-3. 有*11*个内置对象
+3. 有*11*个内置对象**（*cookie*等）**
 
 ####  *.*点运算 和  *[ ]*  中括号运算符 
 
@@ -502,6 +522,20 @@ http://archive.apache.org/dist/jakarta/taglibs/standard/binaries/
 ### *Filter*过滤器 责任链模式
 
 *Filter*过滤器是*JavaEE*的规范，也就是接口。它的作用是：拦截请求，过滤响应
+
+可以使用*Filter*实现统一事务管理
+
+```java
+// 在方法出将可以的异常throw就会被filter所catch，这时进行回滚
+// 在jdbcutils中获取连接时将自动提交关闭
+try {
+    chain.doFilter(request, response);
+    JdbcUtils.commit();
+} catch (Exception e) {
+    e.printStackTrace();
+    JdbcUtils.rollback();
+}
+```
 
 #### 使用
 
