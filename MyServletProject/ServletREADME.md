@@ -48,32 +48,18 @@
 
 #### *servlet*中路径总结
 
-1. *web.xml*
-
-*web.xml*中路径以 /开头表示： *http://ip地址:端口号/项目名称*
-
-2. *jsp*
-
-*jsp*中以/开头表示：  *http://ip地址:端口号*
-
-不以/开头表示： *http://ip地址:端口号/项目名称*
-
-3. 转发*&*重定向
-
-- 转发中都表示 *http://ip地址:端口号/项目名称*
-- 重定向同*jsp*
-
-转发和重定向在*jsp*中和*servlet*中一样使用
+准守相对路径和绝对路径原则，只不过这里的 **/** 代表了当前项目
 
 #### *servlet*下获取资源问题
 
 https://www.cnblogs.com/deng-cc/p/7152988.html
 
 ```java
-// 不能以 / 开头，这样是从classpath（src）下获取资源
+// 用ClassLoader加载资源时不能是绝对路径，只能是相对路径
+// 这样是从classpath（src）下获取资源
 InputStream resourceAsStream = JdbcUtils.class.getClassLoader().getResourceAsStream("druid.properties");
 
-// 如果以 / 开头，就是从classpath下获取资源，不以 / 开头，就从当前文件所在包下获取资源
+// 可以是相对路径和绝对路径
  InputStream resourceAsStream =  JdbcUtils.class.getResourceAsStream("/druid.properties");
 ```
 
